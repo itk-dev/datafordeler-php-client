@@ -14,3 +14,12 @@ $client = new \ItkDev\Datafordeler\CVR\HentCVRData\v1\Client($pemPath);
 $data = $client->hentVirksomhedMedCVRNummer(12345678);
 …
 ```
+
+## Development
+
+### Coding standards
+
+```sh
+composer check-coding-standards
+yarn check-coding-standards
+```
