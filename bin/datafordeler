@@ -3,6 +3,8 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+use ItkDev\Datafordeler\AbstractClient;
+
 if (count($argv) < 4) {
     $message = <<<'EOD'
 Too few arguments.
@@ -19,9 +21,23 @@ EOD;
 [$pemPath, $clientFQN, $method] = array_slice($argv, 1);
 $args = array_slice($argv, 4);
 
-$client = new $clientFQN($pemPath);
+if (!class_exists($clientFQN)) {
+    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
+    exit(1);
+}
+
+if (!class_exists($clientFQN)) {
+    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
+    exit(1);
+}
+
+if (!is_a($clientFQN, AbstractClient::class, true)) {
+    fwrite(STDERR, sprintf('Client class FQN %s must be an instance of %s', $clientFQN, AbstractClient::class).PHP_EOL);
+    exit(1);
+}
 
 try {
+    $client = new $clientFQN($pemPath);
     $data = call_user_func_array([$client, $method], $args);
 
     echo json_encode($data);
