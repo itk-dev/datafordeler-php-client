@@ -19,6 +19,8 @@ class Client extends AbstractClient
     /**
      * Hent virksomhed med CVR nummer.
      *
+     * @param string $cvrNummer The CVR number.
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function hentVirksomhedMedCVRNummer(string $cvrNummer): array

@@ -24,7 +24,8 @@ abstract class AbstractClient
     /**
      * Constructor.
      *
-     * @param false|bool $testMode
+     * @param string $pemPath The path to a PEM certificate.
+     * @param bool $testMode
      */
     public function __construct(string $pemPath, bool $testMode = true)
     {

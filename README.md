@@ -23,3 +23,15 @@ $data = $client->hentVirksomhedMedCVRNummer(12345678);
 composer check-coding-standards
 yarn check-coding-standards
 ```
+
+### API documentation
+
+[Read the documentation](docs/api/index.html).
+
+Run
+
+```sh
+docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --config=phpdoc.dist.xml
+```
+
+to update the API documentation.
