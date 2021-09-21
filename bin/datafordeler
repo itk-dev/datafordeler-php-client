@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+if (count($argv) < 4) {
+    $message = <<<'EOD'
+Too few arguments.
+
+Usage: %s pem-path client-FQN method [parameters…]
+
+EOD;
+    $message = sprintf($message, $argv[0]);
+
+    fwrite(STDERR, $message);
+    exit(1);
+}
+
+[$pemPath, $clientFQN, $method] = array_slice($argv, 1);
+$args = array_slice($argv, 4);
+
+$client = new $clientFQN($pemPath);
+
+try {
+    $data = call_user_func_array([$client, $method], $args);
+
+    echo json_encode($data);
+} catch (\Exception $exception) {
+    fwrite(STDERR, $exception->getMessage());
+    exit(1);
+}
