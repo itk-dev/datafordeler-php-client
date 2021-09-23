@@ -11,15 +11,50 @@ Search.appendIndex(
             "summary": "Constructor.",
             "url": "classes/ItkDev-Datafordeler-AbstractClient.html#method___construct"
         },                {
-            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\v1\\Client",
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client",
             "name": "Client",
-            "summary": "",
-            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-v1-Client.html"
+            "summary": "HentCVRData\u0020client",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html"
         },                {
-            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\v1\\Client\u003A\u003AhentVirksomhedMedCVRNummer\u0028\u0029",
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentAndredeltagereMedCVREnhedsid\u0028\u0029",
+            "name": "hentAndredeltagereMedCVREnhedsid",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentAndredeltagereMedCVREnhedsid"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentCVRPersonMedCVREnhedsid\u0028\u0029",
+            "name": "hentCVRPersonMedCVREnhedsid",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentCVRPersonMedCVREnhedsid"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentEnhedMedCVREnhedsid\u0028\u0029",
+            "name": "hentEnhedMedCVREnhedsid",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentEnhedMedCVREnhedsid"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentProduktionsenhedMedCVREnhedsid\u0028\u0029",
+            "name": "hentProduktionsenhedMedCVREnhedsid",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentProduktionsenhedMedCVREnhedsid"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentProduktionsenhedMedPNummer\u0028\u0029",
+            "name": "hentProduktionsenhedMedPNummer",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentProduktionsenhedMedPNummer"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentVirksomhedMedCVREnhedsid\u0028\u0029",
+            "name": "hentVirksomhedMedCVREnhedsid",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentVirksomhedMedCVREnhedsid"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1\\Client\u003A\u003AhentVirksomhedMedCVRNummer\u0028\u0029",
             "name": "hentVirksomhedMedCVRNummer",
-            "summary": "Hent\u0020virksomhed\u0020med\u0020CVR\u0020nummer.",
-            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-v1-Client.html#method_hentVirksomhedMedCVRNummer"
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-CVR-HentCVRData-V1-Client.html#method_hentVirksomhedMedCVRNummer"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\Exception\\Exception",
+            "name": "Exception",
+            "summary": "",
+            "url": "classes/ItkDev-Datafordeler-Exception-Exception.html"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -36,8 +71,8 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/itkdev.html"
         },                {
-            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\v1",
-            "name": "v1",
+            "fqsen": "\\ItkDev\\Datafordeler\\CVR\\HentCVRData\\V1",
+            "name": "V1",
             "summary": "",
             "url": "namespaces/itkdev-datafordeler-cvr-hentcvrdata-v1.html"
         },                {
@@ -50,5 +85,10 @@ Search.appendIndex(
             "name": "CVR",
             "summary": "",
             "url": "namespaces/itkdev-datafordeler-cvr.html"
+        },                {
+            "fqsen": "\\ItkDev\\Datafordeler\\Exception",
+            "name": "Exception",
+            "summary": "",
+            "url": "namespaces/itkdev-datafordeler-exception.html"
         }            ]
 );

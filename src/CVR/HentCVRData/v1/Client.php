@@ -1,6 +1,6 @@
 <?php
 
-namespace ItkDev\Datafordeler\CVR\HentCVRData\v1;
+namespace ItkDev\Datafordeler\CVR\HentCVRData\V1;
 
 use ItkDev\Datafordeler\AbstractClient;
 
@@ -24,42 +24,107 @@ class Client extends AbstractClient
     }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentAndredeltagereMedCVREnhedsid
+     * @param string|array $pIdOrParameters The id or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentAndredeltagereMedCVREnhedsid">hentAndredeltagereMedCVREnhedsid</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentAndredeltagereMedCVREnhedsid
      */
+    public function hentAndredeltagereMedCVREnhedsid($pIdOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pIdOrParameters) ? ['pId' => $pIdOrParameters] : $pIdOrParameters
+        );
+    }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentCVRPersonMedCVREnhedsid
+     * @param string|array $pIdOrParameters The id or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentCVRPersonMedCVREnhedsid">hentCVRPersonMedCVREnhedsid</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentCVRPersonMedCVREnhedsid
      */
+    public function hentCVRPersonMedCVREnhedsid($pIdOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pIdOrParameters) ? ['pId' => $pIdOrParameters] : $pIdOrParameters
+        );
+    }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentEnhedMedCVREnhedsid
+     * @param string|array $pIdOrParameters The id or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentEnhedMedCVREnhedsid">hentEnhedMedCVREnhedsid</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentEnhedMedCVREnhedsid
      */
+    public function hentEnhedMedCVREnhedsid($pIdOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pIdOrParameters) ? ['pId' => $pIdOrParameters] : $pIdOrParameters
+        );
+    }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedCVREnhedsid
+     * @param string|array $pIdOrParameters The id or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedCVREnhedsid">hentProduktionsenhedMedCVREnhedsid</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedCVREnhedsid
      */
+    public function hentProduktionsenhedMedCVREnhedsid($pIdOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pIdOrParameters) ? ['pId' => $pIdOrParameters] : $pIdOrParameters
+        );
+    }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedPNummer
+     * @param string|array $pPNummerOrParameters The P number or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedPNummer">hentProduktionsenhedMedPNummer</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentProduktionsenhedMedPNummer
      */
+    public function hentProduktionsenhedMedPNummer($pPNummerOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pPNummerOrParameters) ? ['pPNummer' => $pPNummerOrParameters] : $pPNummerOrParameters
+        );
+    }
 
     /**
-     * https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVREnhedsid
+     * @param string|array $pIdOrParameters The id or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVRNummer">hentVirksomhedMedCVRNummer</a>)
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVREnhedsid
      */
-
+    public function hentVirksomhedMedCVREnhedsid($pIdOrParameters): array
+    {
+        return $this->invoke(
+            __FUNCTION__,
+            !is_array($pIdOrParameters) ? ['pId' => $pIdOrParameters] : $pIdOrParameters
+        );
+    }
 
     /**
-     * @param string|array $cvrOrParameters The CVR number or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVRNummer">hentVirksomhedMedCVRNummer</a>)
+     * @param string|array $pCVRNummerOrParameters The CVR number or an array with parameters (cf. <a href="https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVRNummer">hentVirksomhedMedCVRNummer</a>)
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      *
      * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-Metode-hentVirksomhedMedCVRNummer
      */
-    public function hentVirksomhedMedCVRNummer($cvrOrParameters): array
+    public function hentVirksomhedMedCVRNummer($pCVRNummerOrParameters): array
     {
         return $this->invoke(
             __FUNCTION__,
-            !is_array($cvrOrParameters) ? ['pCVRNummer' => $cvrOrParameters] : $cvrOrParameters
+            !is_array($pCVRNummerOrParameters) ? ['pCVRNummer' => $pCVRNummerOrParameters] : $pCVRNummerOrParameters
         );
     }
 }

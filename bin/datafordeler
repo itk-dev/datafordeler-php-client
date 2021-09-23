@@ -42,6 +42,6 @@ try {
 
     echo json_encode($data);
 } catch (\Exception $exception) {
-    fwrite(STDERR, $exception->getMessage());
+    fwrite(STDERR, $exception->getMessage().PHP_EOL);
     exit(1);
 }

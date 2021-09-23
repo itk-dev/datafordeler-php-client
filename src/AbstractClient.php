@@ -3,6 +3,8 @@
 namespace ItkDev\Datafordeler;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use ItkDev\Datafordeler\Exception\Exception;
 
 abstract class AbstractClient
 {
@@ -41,7 +43,7 @@ abstract class AbstractClient
     /**
      * Invoke API method.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws Exception
      */
     protected function invoke(string $method, array $parameters): array
     {
@@ -50,8 +52,11 @@ abstract class AbstractClient
                 'cert' => $this->pemPath,
             ]);
         }
-        $response = $this->client->get($this->getApiBaseUrl() . $method, ['query' => $parameters]);
-
+        try {
+            $response = $this->client->get($this->getApiBaseUrl() . $method, ['query' => $parameters]);
+        } catch (\Exception $exception) {
+            throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
+        }
         return json_decode((string) $response->getBody(), true);
     }
 }
