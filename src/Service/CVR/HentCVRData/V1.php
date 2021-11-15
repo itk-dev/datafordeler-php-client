@@ -1,15 +1,15 @@
 <?php
 
-namespace ItkDev\Datafordeler\CVR\HentCVRData\V1;
+namespace ItkDev\Datafordeler\Service\CVR\HentCVRData;
 
-use ItkDev\Datafordeler\AbstractClient;
+use ItkDev\Datafordeler\Service;
 
 /**
  * HentCVRData client
  *
  * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-REST-HentCVRData
  */
-class Client extends AbstractClient
+class V1 extends Service
 {
     /**
      * {@inheritdoc}

@@ -1,47 +1,104 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+$autoloadPath = __DIR__.'/../vendor/autoload.php';
+if (!file_exists($autoloadPath)) {
+    fwrite(STDERR, sprintf('Cannot load %s', $autoloadPath) . PHP_EOL);
 
-use ItkDev\Datafordeler\AbstractClient;
+    exit(1);
+}
 
-if (count($argv) < 4) {
-    $message = <<<'EOD'
+require_once $autoloadPath;
+
+use ItkDev\Datafordeler\AbstractWebService;
+use ItkDev\Datafordeler\Client;
+
+class Datafordeler
+{
+    private $username;
+    private $password;
+    private $certPath;
+    private $webServiceFQN;
+    private $method;
+    private $args;
+
+    public function __construct(array $args)
+    {
+        $this->parseArguments($args);
+    }
+
+    public function run()
+    {
+        try {
+            $client = $this->certPath
+                ? Client::createFromCertPath($this->certPath)
+                : Client::createFromUsernameAndPassword($this->username, $this->password);
+            $webService = new $this->webServiceFQN($client);
+            $data = call_user_func_array([$webService, $this->method], $this->args);
+
+            echo json_encode($data);
+        } catch (\Exception $exception) {
+            fwrite(STDERR, $exception->getMessage() . PHP_EOL);
+            exit(1);
+        }
+    }
+
+    private function parseArguments(array $args) {
+        if (count($args) < 4) {
+            $message = <<<'EOD'
 Too few arguments.
 
-Usage: %s pem-path client-FQN method [parameters…]
+Usage:
+  %1$s username password Web-service-class Method [parameters…]
+  %1$s Pem-path Web-service-class Method [parameters…]
 
+Arguments:
+  pem-path
+  web-service-class
+  method
+  [parameters…]
 EOD;
-    $message = sprintf($message, $argv[0]);
+            $message = sprintf($message, $args[0]);
 
-    fwrite(STDERR, $message);
-    exit(1);
-}
+            fwrite(STDERR, $message);
+            exit(1);
+        }
 
-[$pemPath, $clientFQN, $method] = array_slice($argv, 1);
-$args = array_slice($argv, 4);
+        array_shift($args);
+        if (isset($args[2]) && false !== strpos($args[2], '\\')) {
+            // We have username and password before FQN.
+            $this->username = array_shift($args);
+            $this->password = array_shift($args);
+        } else {
+            $this->certPath = array_shift($args);
+        }
+        $this->webServiceFQN = array_shift($args);
+        $this->method = array_shift($args);
+        $this->args = array_map(static function ($arg) {
+            return json_decode($arg, true);
+        }, $args);
 
-if (!class_exists($clientFQN)) {
-    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
-    exit(1);
-}
+        if (!class_exists($this->webServiceFQN)) {
+            throw new InvalidArgumentException(sprintf('Invalid web service class FQN: %s', $this->webServiceFQN));
+        }
 
-if (!class_exists($clientFQN)) {
-    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
-    exit(1);
-}
+        if (!class_exists($this->webServiceFQN)) {
+            fwrite(STDERR, sprintf('Invalid web service class FQN: %s', $this->webServiceFQN) . PHP_EOL);
+            exit(1);
+        }
 
-if (!is_a($clientFQN, AbstractClient::class, true)) {
-    fwrite(STDERR, sprintf('Client class FQN %s must be an instance of %s', $clientFQN, AbstractClient::class).PHP_EOL);
-    exit(1);
+        if (0===1)
+        if (!is_a($this->webServiceFQN, AbstractWebService::class, true)) {
+            fwrite(STDERR, sprintf('Web service class FQN %s must be an instance of %s', $this->webServiceFQN,
+                    AbstractWebService::class) . PHP_EOL);
+            exit(1);
+        }
+    }
 }
 
 try {
-    $client = new $clientFQN($pemPath);
-    $data = call_user_func_array([$client, $method], $args);
-
-    echo json_encode($data);
+    (new Datafordeler($argv))->run();
 } catch (\Exception $exception) {
-    fwrite(STDERR, $exception->getMessage().PHP_EOL);
+    fwrite(STDERR, $exception->getMessage(). PHP_EOL);
     exit(1);
 }

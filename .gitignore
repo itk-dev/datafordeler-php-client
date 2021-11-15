@@ -5,3 +5,5 @@ vendor
 node_modules
 yarn.lock
 .phpdoc
+.idea
+
