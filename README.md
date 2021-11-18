@@ -47,7 +47,15 @@ vendor/bin/datafordeler «pem path» 'ItkDev\Datafordeler\Service\CVR\HentCVRDat
 or with username and password:
 
 ```sh
-vendor/bin/datafordeler «username» «password» 'ItkDev\Datafordeler\Service\BBR\BBRPublic\V1' bbrsag '{}'
+vendor/bin/datafordeler «username» «password» 'ItkDev\Datafordeler\Service\BBR\BBRPublic\V1' enhed '{"AdresseIdentificerer": "bb64a029-ba99-404a-85fd-cad0ecf203b7"}'
+```
+
+An address identifier can be fetched via
+<https://api.dataforsyningen.dk/adresser>, e.g.
+<https://api.dataforsyningen.dk/adresser?q=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C>:
+
+```sh
+curl --silent 'https://api.dataforsyningen.dk/adresser?q=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C' | jq --raw-output '.[0].id'
 ```
 
 ## Development
