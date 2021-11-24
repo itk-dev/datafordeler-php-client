@@ -1,6 +1,6 @@
 <?php
 
-namespace ItkDev\Datafordeler\Service\BBR\BBRPublic;
+namespace ItkDev\Datafordeler\Service\BBR\V1;
 
 use ItkDev\Datafordeler\Service;
 
@@ -16,7 +16,7 @@ use ItkDev\Datafordeler\Service;
  * @method grund(array $parameters): array
  * @method tekniskanlaeg(array $parameters): array
  */
-class V1 extends Service
+class BBRPublic extends Service
 {
     /**
      * {@inheritdoc}

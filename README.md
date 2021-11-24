@@ -41,21 +41,21 @@ For testing you can run `vendor/bin/datafordeler` to perform a data lookup, e.g.
 with certificate (in [PEM format](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)):
 
 ```sh
-vendor/bin/datafordeler «pem path» 'ItkDev\Datafordeler\Service\CVR\HentCVRData\V1' hentVirksomhedMedCVRNummer 55133018
+vendor/bin/datafordeler «pem path» 'ItkDev\Datafordeler\Service\CVR\V1\HentCVRData' hentVirksomhedMedCVRNummer 55133018
 ```
 
 or with username and password:
 
 ```sh
-vendor/bin/datafordeler «username» «password» 'ItkDev\Datafordeler\Service\BBR\BBRPublic\V1' enhed '{"AdresseIdentificerer": "bb64a029-ba99-404a-85fd-cad0ecf203b7"}'
+vendor/bin/datafordeler «username» «password» 'ItkDev\Datafordeler\Service\BBR\V1\BBRPublic' enhed '{"AdresseIdentificerer": "bb64a029-ba99-404a-85fd-cad0ecf203b7"}'
 ```
 
 An address identifier can be fetched via
-<https://api.dataforsyningen.dk/adresser>, e.g.
-<https://api.dataforsyningen.dk/adresser?q=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C>:
+<https://api.dataforsyningen.dk/datavask/adresser>, e.g.
+<https://api.dataforsyningen.dk/datavask/adresser?betegnelse=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C>:
 
 ```sh
-curl --silent 'https://api.dataforsyningen.dk/adresser?q=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C' | jq --raw-output '.[0].id'
+curl --silent 'https://api.dataforsyningen.dk/datavask/adresser?betegnelse=Hack%20Kampmanns%20Plads%202%208000%20Aarhus%20C' | jq --raw-output '.resultater[0].adresse.id'
 ```
 
 ## Development

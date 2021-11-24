@@ -37,7 +37,7 @@ abstract class Service
      *
      * @throws Exception
      */
-    protected function invoke(string $method, array $parameters): array
+    protected function invoke(string $method, array $parameters)
     {
         $httpClient = $this->getHttpClient();
         try {

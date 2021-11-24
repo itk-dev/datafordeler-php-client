@@ -28,6 +28,11 @@ class Client
             ->setCertPath($certPath);
     }
 
+    public static function create(): self
+    {
+        return (new static());
+    }
+
     public function handleRequest(RequestInterface $request): RequestInterface
     {
         if ($this->getUsername() && $this->getPassword()) {

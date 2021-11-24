@@ -1,6 +1,6 @@
 <?php
 
-namespace ItkDev\Datafordeler\Service\CVR\HentCVRData;
+namespace ItkDev\Datafordeler\Service\CVR\V1;
 
 use ItkDev\Datafordeler\Service;
 
@@ -9,7 +9,7 @@ use ItkDev\Datafordeler\Service;
  *
  * @see https://confluence.datafordeler.dk/pages/viewpage.action?pageId=17139087#REST(CVR)-REST-HentCVRData
  */
-class V1 extends Service
+class HentCVRData extends Service
 {
     /**
      * {@inheritdoc}
