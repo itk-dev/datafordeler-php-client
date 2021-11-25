@@ -1,47 +1,122 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+$autoloadPath = __DIR__.'/../vendor/autoload.php';
+if (!file_exists($autoloadPath)) {
+    fwrite(STDERR, sprintf('Cannot load %s', $autoloadPath) . PHP_EOL);
 
-use ItkDev\Datafordeler\AbstractClient;
+    exit(1);
+}
 
-if (count($argv) < 4) {
-    $message = <<<'EOD'
-Too few arguments.
+require_once $autoloadPath;
 
-Usage: %s pem-path client-FQN method [parameters…]
+use ItkDev\Datafordeler\Service;
+use ItkDev\Datafordeler\Client;
 
+class Datafordeler
+{
+    private $name;
+    private $username;
+    private $password;
+    private $certPath;
+    private $webServiceFQN;
+    private $method;
+    private $args;
+
+    public function __construct(array $args)
+    {
+        $this->parseArguments($args);
+    }
+
+    public function run()
+    {
+        try {
+            $client = $this->username && $this->password
+                ? Client::createFromUsernameAndPassword($this->username, $this->password)
+                : ($this->certPath ? Client::createFromCertPath($this->certPath) : Client::create());
+            $webService = new $this->webServiceFQN($client);
+            $data = call_user_func_array([$webService, $this->method], $this->args);
+
+            echo json_encode($data);
+        } catch (\Exception $exception) {
+            fwrite(STDERR, $exception->getMessage() . PHP_EOL);
+            exit(1);
+        }
+    }
+
+    private function parseArguments(array $args) {
+        $this->name = array_shift($args);
+        $serviceIndex = null;
+        foreach ($args as $index => $arg) {
+            if (false !== strpos($arg, '\\')) {
+                $serviceIndex = $index;
+                break;
+            }
+        }
+
+        switch ($serviceIndex) {
+            case 2:
+                // We have username and password before FQN.
+                $this->username = array_shift($args);
+                $this->password = array_shift($args);
+                break;
+            case 1:
+                $this->certPath = array_shift($args);
+                break;
+            default:
+                if (null === $serviceIndex) {
+                    $this->usage('Too few or invalid arguments');
+                }
+        }
+
+        $this->webServiceFQN = array_shift($args);
+        $this->method = array_shift($args);
+        if (!$this->method) {
+            $this->usage('Missing method');
+        }
+
+        $this->args = array_map(static function ($arg) {
+            return json_decode($arg, true);
+        }, $args);
+
+        if (!class_exists($this->webServiceFQN)) {
+            throw new InvalidArgumentException(sprintf('Invalid web service class FQN: %s', $this->webServiceFQN));
+        }
+
+        if (!is_a($this->webServiceFQN, Service::class, true)) {
+            throw new InvalidArgumentException(sprintf('Web service class FQN %s must be an instance of %s', $this->webServiceFQN,
+                Service::class));
+        }
+    }
+
+    private function usage(string $message) {
+        global $args;
+        $template = <<<'EOD'
+%1$s
+
+Usage:
+
+  Service requiring username and password: %2$s username password service-class method [parameters…]
+  Service requiring certificate:           %2$s pem-path service-class method [parameters…]
+  Service with anonymous access:           %2$s service-class method [parameters…]
+
+Arguments:
+  username
+  password
+  pem-path
+  service-class
+  method
+  [parameters…]
 EOD;
-    $message = sprintf($message, $argv[0]);
 
-    fwrite(STDERR, $message);
-    exit(1);
-}
-
-[$pemPath, $clientFQN, $method] = array_slice($argv, 1);
-$args = array_slice($argv, 4);
-
-if (!class_exists($clientFQN)) {
-    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
-    exit(1);
-}
-
-if (!class_exists($clientFQN)) {
-    fwrite(STDERR, sprintf('Invalid client class FQN: %s', $clientFQN).PHP_EOL);
-    exit(1);
-}
-
-if (!is_a($clientFQN, AbstractClient::class, true)) {
-    fwrite(STDERR, sprintf('Client class FQN %s must be an instance of %s', $clientFQN, AbstractClient::class).PHP_EOL);
-    exit(1);
+        fwrite(STDERR, sprintf($template, $message, $this->name));
+        exit(1);
+    }
 }
 
 try {
-    $client = new $clientFQN($pemPath);
-    $data = call_user_func_array([$client, $method], $args);
-
-    echo json_encode($data);
+    (new Datafordeler($argv))->run();
 } catch (\Exception $exception) {
-    fwrite(STDERR, $exception->getMessage());
+    fwrite(STDERR, $exception->getMessage(). PHP_EOL);
     exit(1);
 }
