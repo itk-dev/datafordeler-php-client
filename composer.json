@@ -1,0 +1,40 @@
+{
+    "name": "itk-dev/datafordeler-php-client",
+    "description": "PHP client for datafordeler.dk",
+    "type": "library",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ItkDev\\Datafordeler\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mikkel Ricky",
+            "email": "rimi@aarhus.dk"
+        }
+    ],
+    "bin": ["bin/datafordeler"],
+    "require-dev": {
+        "escapestudios/symfony2-coding-standard": "^3.12",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+    },
+    "scripts": {
+        "check-coding-standards": [
+            "vendor/bin/phpcs --standard=phpcs.xml.dist"
+        ],
+        "apply-coding-standards": [
+            "vendor/bin/phpcbf --standard=phpcs.xml.dist"
+        ],
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ],
+        "post-install-cmd": [
+            "@install-codestandards"
+        ]
+    }
+}
